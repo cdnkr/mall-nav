@@ -2,6 +2,8 @@
 
 Select a mall (or auto-detect based on your your current location), select a store, and see which direction it is from where you are. Or find where you parked.
 
+![Screenshot](./public/screenshots/1.png)
+
 ## Getting started
 
 1. Run `pnpm i` followed by `pnpm dev` to install the dependencies and start the development server.
