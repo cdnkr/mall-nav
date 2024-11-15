@@ -53,7 +53,7 @@ const GooglePlacesAutocomplete: React.FC<GooglePlacesAutocompleteProps> = ({
             ? new window.google.maps.LatLngBounds(
                 new window.google.maps.LatLng(bounds.south, bounds.west),
                 new window.google.maps.LatLng(bounds.north, bounds.east),
-            )
+              )
             : undefined,
           strictBounds: true,
         },
@@ -64,7 +64,8 @@ const GooglePlacesAutocomplete: React.FC<GooglePlacesAutocompleteProps> = ({
   }
 
   const handlePlaceSelect = () => {
-    const place: google.maps.places.PlaceResult | undefined = autocompleteRef.current?.getPlace()
+    const place: google.maps.places.PlaceResult | undefined =
+      autocompleteRef.current?.getPlace()
     if (place && place.geometry) {
       onPlaceSelected(place)
       setInputValue(place.name || place.formatted_address || '')
@@ -73,7 +74,8 @@ const GooglePlacesAutocomplete: React.FC<GooglePlacesAutocompleteProps> = ({
 
   useEffect(() => {
     if (!place && inputValue) setInputValue('')
-    if (place && !inputValue) setInputValue(place.name || place.formatted_address || '')
+    if (place && !inputValue)
+      setInputValue(place.name || place.formatted_address || '')
   }, [place])
 
   function handleClick() {

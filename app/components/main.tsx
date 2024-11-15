@@ -14,10 +14,8 @@ import GooglePlacesAutocomplete, {
 import InstallButton from './install-pwa'
 
 export default function Main() {
-  const {
-    position,
-    requestPermission: requestGeolocationPermission,
-  } = useGeolocation()
+  const { position, requestPermission: requestGeolocationPermission } =
+    useGeolocation()
   const {
     permission: compassPermission,
     direction,
@@ -28,11 +26,15 @@ export default function Main() {
   } = useDeviceOrientation({ userPosition: position })
 
   const [mall, setMall] = useState<GooglePlace | null>(null)
-  const [mallBoundingBox, setMallBoundingBox] = useState<BoundingBox | null>(null)
+  const [mallBoundingBox, setMallBoundingBox] = useState<BoundingBox | null>(
+    null,
+  )
   const [store, setStore] = useState<GooglePlace | null>(null)
   const [autoDetectedMall, setAutoDetectedMall] = useState<boolean>(false)
-  const [parkedCarLocation, setParkedCarLocation] = useState<GooglePlace | null>(null)
-  const [isNavigatingToParkedCarLocation, setIsNavigatingToParkedCarLocation] = useState<boolean>(false)
+  const [parkedCarLocation, setParkedCarLocation] =
+    useState<GooglePlace | null>(null)
+  const [isNavigatingToParkedCarLocation, setIsNavigatingToParkedCarLocation] =
+    useState<boolean>(false)
 
   // Function to fetch nearby malls and set the closest one
   async function findClosestMall() {
@@ -54,19 +56,19 @@ export default function Main() {
               ...closestMall.geometry,
               location: {
                 lat: () => closestMall.geometry.location.lat,
-                lng: () => closestMall.geometry.location.lng
-              }
-            }
+                lng: () => closestMall.geometry.location.lng,
+              },
+            },
           }
 
           setMall(convertedMall)
           setAutoDetectedMall(true)
         }
       } else {
-        console.log("No malls found nearby.")
+        console.log('No malls found nearby.')
       }
     } catch (error) {
-      console.error("Error fetching malls:", error)
+      console.error('Error fetching malls:', error)
     }
   }
 
@@ -81,9 +83,11 @@ export default function Main() {
     // Convert position to GooglePlace format with minimal required properties
     const carLocation: GooglePlace = {
       geometry: {
-        location:
-          new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-      }
+        location: new window.google.maps.LatLng(
+          position.coords.latitude,
+          position.coords.longitude,
+        ),
+      },
     }
     setParkedCarLocation(carLocation)
   }
@@ -99,16 +103,20 @@ export default function Main() {
   useEffect(() => {
     if (!mall || !mall.geometry || !mall.geometry.location) return
 
-    const boundingBox = getBoundingBox(mall.geometry.location.lat(), mall.geometry.location.lng(), 2)
+    const boundingBox = getBoundingBox(
+      mall.geometry.location.lat(),
+      mall.geometry.location.lng(),
+      2,
+    )
     setMallBoundingBox(boundingBox)
   }, [mall])
 
   return (
-    <div className='md:pt-8'>
+    <div className="md:pt-8">
       <div className="pt-4 pb-4 pl-4 pr-4 md:pt-4 md:pb-12 md:pl-8 md:pr-8 max-w-screen-sm mx-auto w-full space-y-4 bg-[#111111] rounded-xl">
         <div>
           <div className="flex justify-center items-start gap-4">
-            <div className='rounded-xl overflow-hidden bg-black shrink-0'>
+            <div className="rounded-xl overflow-hidden bg-black shrink-0">
               <Image
                 src="/icons/512.png"
                 alt="Compass disabled"
@@ -119,7 +127,8 @@ export default function Main() {
             <div>
               <h1 className="text-2xl font-bold">MallNav</h1>
               <p className="text-gray-400 text-base leading-tight">
-                Select a mall, select a store, and see which direction it is from where you are. <i>Or find your parked car.</i>
+                Select a mall, select a store, and see which direction it is
+                from where you are. <i>Or find your parked car.</i>
               </p>
             </div>
           </div>
@@ -148,8 +157,8 @@ export default function Main() {
               {!isNavigatingToParkedCarLocation && (
                 <>
                   {!parkedCarLocation ? (
-                    <div className='flex items-center justify-center gap-4'>
-                      <div className='flex flex-col items-center gap-2 w-full max-w-[240px]'>
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="flex flex-col items-center gap-2 w-full max-w-[240px]">
                         <button
                           onClick={onMarkParkedCarLocation}
                           className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
@@ -160,24 +169,28 @@ export default function Main() {
                       </div>
                     </div>
                   ) : (
-                    <div className='flex items-center justify-center gap-4'>
-                      <div className='flex flex-col items-center gap-2 min-w-[160px]'>
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="flex flex-col items-center gap-2 min-w-[160px]">
                         <button
                           onClick={onNavigateToParkedCarLocation}
                           className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
                         >
                           <Car className="size-6" />
                         </button>
-                        <span className='text-gray-400 text-sm'>Go to parked car</span>
+                        <span className="text-gray-400 text-sm">
+                          Go to parked car
+                        </span>
                       </div>
-                      <div className='flex flex-col items-center gap-2 min-w-[160px]'>
+                      <div className="flex flex-col items-center gap-2 min-w-[160px]">
                         <button
                           onClick={() => setParkedCarLocation(null)}
                           className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-red-700 leading-none text-center"
                         >
                           <Trash className="size-6" />
                         </button>
-                        <span className='text-gray-400 text-sm'>Clear parking location</span>
+                        <span className="text-gray-400 text-sm">
+                          Clear parking location
+                        </span>
                       </div>
                     </div>
                   )}
@@ -186,7 +199,7 @@ export default function Main() {
               )}
               {!isNavigatingToParkedCarLocation ? (
                 <>
-                  <div className='space-y-1'>
+                  <div className="space-y-1">
                     <GooglePlacesAutocomplete
                       place={mall}
                       onPlaceSelected={setMall}
@@ -194,7 +207,10 @@ export default function Main() {
                       onClick={() => setAutoDetectedMall(false)}
                     />
                     {autoDetectedMall && (
-                      <div className='w-full flex items-center gap-2 text-blue text-sm'><div className='size-2 rounded-full bg-blue' />Auto detected mall</div>
+                      <div className="w-full flex items-center gap-2 text-blue text-sm">
+                        <div className="size-2 rounded-full bg-blue" />
+                        Auto detected mall
+                      </div>
                     )}
                   </div>
                   {mall && mallBoundingBox && (
@@ -207,16 +223,25 @@ export default function Main() {
                   )}
                 </>
               ) : (
-                <div className='text-white text-center text-xl'>
-                  Navigating to your parking <span className='text-red-700 underline cursor-pointer ml-1' onClick={() => setIsNavigatingToParkedCarLocation(false)}>Cancel</span>
+                <div className="text-white text-center text-xl">
+                  Navigating to your parking{' '}
+                  <span
+                    className="text-red-700 underline cursor-pointer ml-1"
+                    onClick={() => setIsNavigatingToParkedCarLocation(false)}
+                  >
+                    Cancel
+                  </span>
                 </div>
               )}
             </div>
-            {(store || (parkedCarLocation && isNavigatingToParkedCarLocation)) && (
+            {(store ||
+              (parkedCarLocation && isNavigatingToParkedCarLocation)) && (
               <Compass
                 position={position}
                 direction={direction}
-                toPlace={isNavigatingToParkedCarLocation ? parkedCarLocation : store}
+                toPlace={
+                  isNavigatingToParkedCarLocation ? parkedCarLocation : store
+                }
               />
             )}
           </div>

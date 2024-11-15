@@ -12,11 +12,7 @@ interface Props {
   toPlace: GooglePlace | null
 }
 
-export default function Compass({
-  position,
-  direction,
-  toPlace,
-}: Props) {
+export default function Compass({ position, direction, toPlace }: Props) {
   const [showNorth, setShowNorth] = useState(false)
 
   function isWithinRange() {

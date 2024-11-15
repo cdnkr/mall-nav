@@ -34,9 +34,9 @@ export function getDistance(
   const a =
     Math.sin(latDiff / 2) * Math.sin(latDiff / 2) +
     Math.cos(lat1Rad) *
-    Math.cos(lat2Rad) *
-    Math.sin(lonDiff / 2) *
-    Math.sin(lonDiff / 2)
+      Math.cos(lat2Rad) *
+      Math.sin(lonDiff / 2) *
+      Math.sin(lonDiff / 2)
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
@@ -99,15 +99,15 @@ export function getBoundingBox(
   const lngOffset = distanceInKm / (111.32 * Math.cos((lat * Math.PI) / 180))
 
   // Calculate bounding box
-  const north = lat + latOffset;
-  const south = lat - latOffset;
-  const east = lng + lngOffset;
-  const west = lng - lngOffset;
+  const north = lat + latOffset
+  const south = lat - latOffset
+  const east = lng + lngOffset
+  const west = lng - lngOffset
 
   return {
     north,
     south,
     east,
     west,
-  };
+  }
 }
