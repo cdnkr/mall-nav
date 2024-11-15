@@ -30,8 +30,8 @@ export default function Main() {
   const [autoDetectedMall, setAutoDetectedMall] = useState<boolean>(false)
   const [parkedCarLocation, setParkedCarLocation] = useState<GooglePlace | null>(null)
   const [isNavigatingToParkedCarLocation, setIsNavigatingToParkedCarLocation] = useState<boolean>(false)
-  // Add auto detection of closest mall
-  // Function to fetch nearby malls
+
+  // Function to fetch nearby malls and set the closest one
   async function findClosestMall() {
     if (!position) return
     const lat = position.coords.latitude
