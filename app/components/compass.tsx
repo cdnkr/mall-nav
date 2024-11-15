@@ -89,13 +89,13 @@ export default function Compass({
         </div>
         {showNorth && renderNorthOnCompass()}
       </div>
-      <div className="flex items-center space-x-2 pt-8">
+      <div className="flex items-center space-x-2 pt-3">
         <Switch
           id="show-north"
           checked={showNorth}
           onCheckedChange={setShowNorth}
         />
-        <label htmlFor="show-north" className="text-sm uppercase">
+        <label htmlFor="show-north" className="text-sm">
           Show North
         </label>
       </div>

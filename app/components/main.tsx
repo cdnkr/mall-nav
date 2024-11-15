@@ -140,7 +140,7 @@ export default function Main() {
             Enable Compass and Location
           </button>
         ) : (
-          <div className="space-y-16">
+          <div className="space-y-8">
             <div className="space-y-4">
               {!isNavigatingToParkedCarLocation && (
                 <>
@@ -204,8 +204,8 @@ export default function Main() {
                   )}
                 </>
               ) : (
-                <div className='text-white text-xl font-bold'>
-                  Navigating to parked car <span className='text-red-700 underline cursor-pointer ml-3' onClick={() => setIsNavigatingToParkedCarLocation(false)}>Cancel</span>
+                <div className='text-white text-center text-xl'>
+                  Navigating to your parking <span className='text-red-700 underline cursor-pointer ml-1' onClick={() => setIsNavigatingToParkedCarLocation(false)}>Cancel</span>
                 </div>
               )}
             </div>
