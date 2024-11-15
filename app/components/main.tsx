@@ -2,15 +2,16 @@
 
 import useDeviceOrientation from '@/app/hooks/use-device-orientation'
 import useGeolocation from '@/app/hooks/use-geolocation'
-import { Car, Compass as CompassIcon, MapPinCheck, Navigation, Trash } from 'lucide-react'
+import { Car, Compass as CompassIcon, Trash } from 'lucide-react'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { BoundingBox, getBoundingBox } from '../utils/geo'
+import { CalibrateInstructions } from './calibrate-instructions'
 import Compass from './compass'
 import GooglePlacesAutocomplete, {
   GooglePlace,
 } from './google-places-autocomplete'
 import InstallButton from './install-pwa'
-import Image from 'next/image'
-import { BoundingBox, getBoundingBox } from '../utils/geo'
 
 export default function Main() {
   const {
@@ -22,6 +23,8 @@ export default function Main() {
     direction,
     hasSupport: hasDeviceOrientationSupport,
     requestPermission: requestCompassPermission,
+    needsCalibration,
+    setNeedsCalibration,
   } = useDeviceOrientation({ userPosition: position })
 
   const [mall, setMall] = useState<GooglePlace | null>(null)
@@ -219,6 +222,10 @@ export default function Main() {
           </div>
         )}
         <InstallButton />
+        <CalibrateInstructions
+          needsCalibration={needsCalibration}
+          setNeedsCalibration={setNeedsCalibration}
+        />
       </div>
     </div>
   )
