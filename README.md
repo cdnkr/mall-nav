@@ -1,4 +1,4 @@
-## Mall Nav
+## MallNav
 
 Select a mall (or auto-detect based on your your current location), select a store, and see which direction it is from where you are. Or find where you parked.
 
