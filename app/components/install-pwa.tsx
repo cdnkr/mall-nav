@@ -1,6 +1,7 @@
 // components/InstallButton.tsx
 import { Download } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Button from '../ui/button'
 
 const InstallButton = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
@@ -28,7 +29,7 @@ const InstallButton = () => {
   const handleInstallClick = async () => {
     if (deferredPrompt) {
       // Show the install prompt
-      ;(deferredPrompt as any).prompt()
+      ; (deferredPrompt as any).prompt()
       // Wait for the user to respond to the prompt
       const { outcome } = await (deferredPrompt as any).userChoice
       // Reset the deferred prompt variable
@@ -42,15 +43,12 @@ const InstallButton = () => {
   return (
     <>
       {isInstallable && (
-        <div className="absolute bottom-0 left-0 w-full">
-          <div className="max-w-screen-sm mx-auto py-4 border-t border-gray-700">
-            <button
-              onClick={handleInstallClick}
-              className="px-2 py-4 rounded-xl w-full cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
-            >
+        <div className=" w-full">
+          <div className="max-w-screen-md mx-auto py-4 border-t border-black">
+            <Button variant="primary" onClick={handleInstallClick} className="w-full">
               <Download className="size-4" />
               Install
-            </button>
+            </Button>
           </div>
         </div>
       )}

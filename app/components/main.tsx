@@ -12,6 +12,7 @@ import GooglePlacesAutocomplete, {
   GooglePlace,
 } from './google-places-autocomplete'
 import InstallButton from './install-pwa'
+import Button from '../ui/button'
 
 export default function Main() {
   const { position, requestPermission: requestGeolocationPermission } =
@@ -112,94 +113,83 @@ export default function Main() {
   }, [mall])
 
   return (
-    <div className="md:pt-8">
-      <div className="pt-4 pb-4 pl-4 pr-4 md:pt-4 md:pb-12 md:pl-8 md:pr-8 max-w-screen-sm mx-auto w-full space-y-4 bg-[#111111] rounded-xl">
+    <div className="">
+      <div className="pt-4 pb-4 pl-4 pr-4 md:pt-8 md:pb-8 md:pl-8 md:pr-8 max-w-screen-md mx-auto w-full space-y-6 lg:bg-black/20">
         <div>
           <div className="flex justify-center items-start gap-4">
-            <div className="rounded-xl overflow-hidden bg-black shrink-0">
-              <Image
-                src="/icons/512.png"
-                alt="Compass disabled"
-                width={70}
-                height={70}
-              />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">MallNav</h1>
-              <p className="text-gray-400 text-base leading-tight">
-                Select a mall, select a store, and see which direction it is
-                from where you are. <i>Or find your parked car.</i>
-              </p>
+            <div className="flex flex-col items-center justify-center gap-4">
+              <h1 className="font-oswald text-center text-[5rem] lg:text-[9rem] text-white uppercase font-black tracking-tight leading-none transition-all duration-300">MallNav</h1>
+              {compassPermission !== 'granted' && (
+                <p className="text-gray-300 text-base leading-tight text-center font-mono max-w-screen-sm">
+                  Select a mall, select a store, and see which direction it is
+                  from where you are. <i>Or find your parked car.</i>
+                </p>
+              )}
+
             </div>
           </div>
         </div>
         {!hasDeviceOrientationSupport && (
           <div className="mt-3">
-            <p className="text-red-700 border border-red-700 rounded-md p-2">
+            <p className="text-red-700 border border-red-700 p-2 font-mono bg-black">
               <b>Your device does not support the compass feature.</b>
               <br />
               This app will not work on your device.
             </p>
           </div>
         )}
-        <hr className="border-gray-700" />
+        {/* <hr className="border-gray-400" /> */}
         {compassPermission !== 'granted' ? (
-          <button
+          <Button
             onClick={onRequestPermission}
-            className="px-2 py-4 rounded-md w-full cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
+            className="w-full gap-3"
           >
-            <CompassIcon className="size-6" />
-            Enable Compass and Location
-          </button>
+            <CompassIcon className="size-5" />
+            Enable Compass & Location
+          </Button>
         ) : (
           <div className="space-y-8">
-            <div className="space-y-4">
+            <div className="space-y-8">
               {!isNavigatingToParkedCarLocation && (
                 <>
                   {!parkedCarLocation ? (
                     <div className="flex items-center justify-center gap-4">
-                      <div className="flex flex-col items-center gap-2 w-full max-w-[240px]">
-                        <button
+                      <div className="flex flex-col items-center gap-2 w-full">
+                        <Button
                           onClick={onMarkParkedCarLocation}
-                          className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
+                          className="w-full"
                         >
                           <Car className="size-6" />
                           Set parking location
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center gap-4">
-                      <div className="flex flex-col items-center gap-2 min-w-[160px]">
-                        <button
+                    <div className="flex flex-col items-center justify-center gap-4">
+                      <div className="flex flex-col items-center gap-2 w-full">
+                        <Button
                           onClick={onNavigateToParkedCarLocation}
-                          className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
+                          className="w-full"
                         >
-                          <Car className="size-6" />
-                        </button>
-                        <span className="text-gray-400 text-sm">
                           Go to parked car
-                        </span>
+                        </Button>
                       </div>
-                      <div className="flex flex-col items-center gap-2 min-w-[160px]">
-                        <button
+                      <div className="flex flex-col items-center gap-2 w-full">
+                        <Button
                           onClick={() => setParkedCarLocation(null)}
-                          className="px-6 py-4 w-full rounded-md cursor-pointer flex items-center justify-center gap-2 bg-red-700 leading-none text-center"
+                          className="w-full"
                         >
-                          <Trash className="size-6" />
-                        </button>
-                        <span className="text-gray-400 text-sm">
                           Clear parking location
-                        </span>
+                        </Button>
                       </div>
                     </div>
                   )}
-                  <hr className="border-gray-700" />
+                  {/* <hr className="border-gray-400" /> */}
                 </>
               )}
               {!isNavigatingToParkedCarLocation ? (
-                <>
-                  <div className="space-y-1">
+                <div className="space-y-4">
+                  <div className="space-y-2">
                     <GooglePlacesAutocomplete
                       place={mall}
                       onPlaceSelected={setMall}
@@ -207,8 +197,8 @@ export default function Main() {
                       onClick={() => setAutoDetectedMall(false)}
                     />
                     {autoDetectedMall && (
-                      <div className="w-full flex items-center gap-2 text-blue text-sm">
-                        <div className="size-2 rounded-full bg-blue" />
+                      <div className="w-full flex items-center gap-2 text-blue text-sm text-green-400 font-mono">
+                        <div className="size-2 bg-green-400" />
                         Auto detected mall
                       </div>
                     )}
@@ -221,9 +211,9 @@ export default function Main() {
                       placeholder="Search for a store"
                     />
                   )}
-                </>
+                </div>
               ) : (
-                <div className="text-white text-center text-xl">
+                <div className="text-white text-center text-xl font-mono">
                   Navigating to your parking{' '}
                   <span
                     className="text-red-700 underline cursor-pointer ml-1"
@@ -236,14 +226,14 @@ export default function Main() {
             </div>
             {(store ||
               (parkedCarLocation && isNavigatingToParkedCarLocation)) && (
-              <Compass
-                position={position}
-                direction={direction}
-                toPlace={
-                  isNavigatingToParkedCarLocation ? parkedCarLocation : store
-                }
-              />
-            )}
+                <Compass
+                  position={position}
+                  direction={direction}
+                  toPlace={
+                    isNavigatingToParkedCarLocation ? parkedCarLocation : store
+                  }
+                />
+              )}
           </div>
         )}
         <InstallButton />

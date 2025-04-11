@@ -31,7 +31,7 @@ export function CalibrateInstructions({
             </div>
             <button
               onClick={() => setNeedsCalibration(false)}
-              className="mt-8 px-2 py-4 rounded-md w-full cursor-pointer flex items-center justify-center gap-2 bg-violet-700 leading-none text-center"
+              className="mt-8 px-2 py-4 rounded-md w-full cursor-pointer flex items-center justify-center gap-2 bg-primary leading-none text-center"
             >
               <CheckCircle className="size-4" />
               Done calibrating

@@ -1,6 +1,5 @@
 'use client'
 
-import { ArrowBigUpDash, Minus } from 'lucide-react'
 import { useState } from 'react'
 import { Switch } from '../ui/switch'
 import { calculateBearing } from '../utils/geo'
@@ -48,13 +47,19 @@ export default function Compass({ position, direction, toPlace }: Props) {
     const angleInDegrees = bearing - (direction?.degrees || 0)
 
     return (
-      <ArrowBigUpDash
-        className={`absolute size-60 text-violet-700 fill-violet-700 z-1 transition-opacity duration-300 ${isWithinRange() ? 'opacity-100' : 'opacity-75'}`}
+      <svg
+        viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+        className={`absolute size-60 text-green-400 z-1 transition-opacity duration-300 ${isWithinRange() ? 'opacity-100' : 'opacity-75'}`}
         style={{
-          transform: `rotate(${angleInDegrees}deg)`,
+          transform: `rotate(${angleInDegrees}deg)`
         }}
         strokeWidth={1}
-      />
+      >
+        <g fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10" strokeWidth="48">
+          <path d="m112 244 144-144 144 144"/>
+          <path d="m256 120v292"/>
+        </g>
+      </svg>
     )
   }
 
@@ -67,12 +72,11 @@ export default function Compass({ position, direction, toPlace }: Props) {
     const y = -scaledRadius * Math.cos(angleInRadians)
 
     return (
-      <Minus
-        className="absolute size-5 text-rose-500 z-1"
+      <div
+        className="absolute w-4 h-2 bg-red-700 z-1"
         style={{
           transform: `translate(${x}px, ${y}px) rotate(${angleInRadians * (180 / Math.PI)}deg)`,
         }}
-        strokeWidth={5}
       />
     )
   }
@@ -91,7 +95,7 @@ export default function Compass({ position, direction, toPlace }: Props) {
           checked={showNorth}
           onCheckedChange={setShowNorth}
         />
-        <label htmlFor="show-north" className="text-sm">
+        <label htmlFor="show-north" className="text-sm font-mono uppercase">
           Show North
         </label>
       </div>

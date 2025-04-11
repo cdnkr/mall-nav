@@ -1,74 +1,840 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+@theme {
+  --color-primary: #05df72;
+  --color-primary-rgb: 5, 223, 114;
+  --color-background: #222;
+  --color-text: #fafafa;
+  --color-dark: #111;
+  --color-dark-rgb: 17, 17, 17;
+  --color-muted: #757575;
+  --color-button: #000;
+  --color-button-border: #000;
+  --color-button-text: #fff;
+  --color-shadow: 0, 0, 0, 1;
+  /* Image */
+  --color-image-shadow: 0, 0, 0;
+
+  --font-sans: var(--font-libre-franklin);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-gochi-hand: var(--font-gochi-hand);
+  --font-oswald: var(--font-oswald);
+  --font-tiny5: var(--font-tiny5);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  height: 15px;
+  width: 15px;
 }
 
-::selection {
-  @apply bg-violet-700 text-white;
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.05);
+  /* border-left: 2px solid var(--color-dark); */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: hsla(0, 0%, 100%, 0.3);
+}
+
+/* Patterns */
+
+.pattern-checks-sm {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-position:
+    0 0,
+    10px 10px;
+  background-size: calc(2 * 10px) calc(2 * 10px);
+}
+
+.pattern-checks-md {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-position:
+    0 0,
+    25px 25px;
+  background-size: calc(2 * 25px) calc(2 * 25px);
+}
+
+.pattern-checks-lg {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-position:
+    0 0,
+    50px 50px;
+  background-size: calc(2 * 50px) calc(2 * 50px);
+}
+
+.pattern-checks-xl {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--color-pattern) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-position:
+    0 0,
+    100px 100px;
+  background-size: calc(2 * 100px) calc(2 * 100px);
+}
+
+.pattern-grid-sm {
+  background-image:
+    linear-gradient(var(--color-pattern) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-pattern) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.pattern-grid-md {
+  background-image:
+    linear-gradient(var(--color-pattern) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-pattern) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.pattern-grid-lg {
+  background-image:
+    linear-gradient(var(--color-pattern) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-pattern) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.pattern-grid-xl {
+  background-image:
+    linear-gradient(var(--color-pattern) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-pattern) 1px, transparent 1px);
+  background-size: 100px 100px;
+}
+
+.pattern-dots-sm {
+  background-image: radial-gradient(
+    var(--color-pattern) 0.5px,
+    transparent 0.5px
+  );
+  background-size: calc(10 * 0.5px) calc(10 * 0.5px);
+}
+
+.pattern-dots-md {
+  background-image: radial-gradient(var(--color-pattern) 1px, transparent 1px);
+  background-size: calc(10 * 1px) calc(10 * 1px);
+}
+
+.pattern-dots-lg {
+  background-image: radial-gradient(
+    var(--color-pattern) 1.5px,
+    transparent 1.5px
+  );
+  background-size: calc(10 * 1.5px) calc(10 * 1.5px);
+}
+
+.pattern-dots-xl {
+  background-image: radial-gradient(var(--color-pattern) 2px, transparent 2px);
+  background-size: calc(10 * 2px) calc(10 * 2px);
+}
+
+.pattern-cross-dots-sm {
+  background-image:
+    radial-gradient(var(--color-pattern) 0.5px, transparent 0.5px),
+    radial-gradient(var(--color-pattern) 0.5px, transparent 0.5px);
+  background-size: calc(20 * 0.5px) calc(20 * 0.5px);
+  background-position:
+    0 0,
+    calc(10 * 0.5px) calc(10 * 0.5px);
+}
+
+.pattern-cross-dots-md {
+  background-image:
+    radial-gradient(var(--color-pattern) 1px, transparent 1px),
+    radial-gradient(var(--color-pattern) 1px, transparent 1px);
+  background-size: calc(20 * 1px) calc(20 * 1px);
+  background-position:
+    0 0,
+    calc(10 * 1px) calc(10 * 1px);
+}
+
+.pattern-cross-dots-lg {
+  background-image:
+    radial-gradient(var(--color-pattern) 1.5px, transparent 1.5px),
+    radial-gradient(var(--color-pattern) 1.5px, transparent 1.5px);
+  background-size: calc(20 * 1.5px) calc(20 * 1.5px);
+  background-position:
+    0 0,
+    calc(10 * 1.5px) calc(10 * 1.5px);
+}
+
+.pattern-cross-dots-xl {
+  background-image:
+    radial-gradient(var(--color-pattern) 2px, transparent 2px),
+    radial-gradient(var(--color-pattern) 2px, transparent 2px);
+  background-size: calc(20 * 2px) calc(20 * 2px);
+  background-position:
+    0 0,
+    calc(10 * 2px) calc(10 * 2px);
+}
+
+.pattern-vertical-lines-sm {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-horizontal-lines-sm {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-diagonal-lines-sm {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-pattern) 0,
+    var(--color-pattern) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-vertical-lines-md {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-horizontal-lines-md {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-diagonal-lines-md {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-pattern) 0,
+    var(--color-pattern) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-vertical-lines-lg {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-horizontal-lines-lg {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-diagonal-lines-lg {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-pattern) 0,
+    var(--color-pattern) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-vertical-lines-xl {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 100px 100px;
+}
+
+.pattern-horizontal-lines-xl {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--color-pattern),
+    var(--color-pattern) 1px,
+    transparent 1px,
+    transparent
+  );
+  background-size: 100px 100px;
+}
+
+.pattern-diagonal-lines-xl {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-pattern) 0,
+    var(--color-pattern) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 100px 100px;
+}
+
+.pattern-vertical-stripes-sm {
+  background-image: linear-gradient(
+    90deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-horizontal-stripes-sm {
+  background-image: linear-gradient(
+    0deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-diagonal-stripes-sm {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    var(--color-pattern) 10px,
+    var(--color-pattern) calc(2 * 10px)
+  );
+}
+
+.pattern-vertical-stripes-md {
+  background-image: linear-gradient(
+    90deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-horizontal-stripes-md {
+  background-image: linear-gradient(
+    0deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-diagonal-stripes-md {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 25px,
+    var(--color-pattern) 25px,
+    var(--color-pattern) calc(2 * 25px)
+  );
+}
+
+.pattern-vertical-stripes-lg {
+  background-image: linear-gradient(
+    90deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-horizontal-stripes-lg {
+  background-image: linear-gradient(
+    0deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-diagonal-stripes-lg {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 50px,
+    var(--color-pattern) 50px,
+    var(--color-pattern) calc(2 * 50px)
+  );
+}
+
+.pattern-vertical-stripes-xl {
+  background-image: linear-gradient(
+    90deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 100px 100px;
+}
+
+.pattern-horizontal-stripes-xl {
+  background-image: linear-gradient(
+    0deg,
+    transparent 50%,
+    var(--color-pattern) 50%
+  );
+  background-size: 100px 100px;
+}
+
+.pattern-diagonal-stripes-xl {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 100px,
+    var(--color-pattern) 100px,
+    var(--color-pattern) calc(2 * 100px)
+  );
+}
+
+.pattern-zigzag-sm {
+  background:
+    linear-gradient(135deg, var(--color-pattern) 25%, transparent 25%) -10px 0,
+    linear-gradient(225deg, var(--color-pattern) 25%, transparent 25%) -10px 0,
+    linear-gradient(315deg, var(--color-pattern) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-pattern) 25%, transparent 25%);
+  background-size: calc(2 * 10px) calc(2 * 10px);
+}
+
+.pattern-zigzag-md {
+  background:
+    linear-gradient(135deg, var(--color-pattern) 25%, transparent 25%) -25px 0,
+    linear-gradient(225deg, var(--color-pattern) 25%, transparent 25%) -25px 0,
+    linear-gradient(315deg, var(--color-pattern) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-pattern) 25%, transparent 25%);
+  background-size: calc(2 * 25px) calc(2 * 25px);
+}
+
+.pattern-zigzag-lg {
+  background:
+    linear-gradient(135deg, var(--color-pattern) 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, var(--color-pattern) 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, var(--color-pattern) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-pattern) 25%, transparent 25%);
+  background-size: calc(2 * 50px) calc(2 * 50px);
+}
+
+.pattern-zigzag-xl {
+  background:
+    linear-gradient(135deg, var(--color-pattern) 25%, transparent 25%) -100px 0,
+    linear-gradient(225deg, var(--color-pattern) 25%, transparent 25%) -100px 0,
+    linear-gradient(315deg, var(--color-pattern) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-pattern) 25%, transparent 25%);
+  background-size: calc(2 * 100px) calc(2 * 100px);
+}
+
+.pattern-triangles-sm {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-pattern) 50%,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+}
+
+.pattern-triangles-md {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-pattern) 50%,
+    transparent 50%
+  );
+  background-size: 25px 25px;
+}
+
+.pattern-triangles-lg {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-pattern) 50%,
+    transparent 50%
+  );
+  background-size: 50px 50px;
+}
+
+.pattern-triangles-xl {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-pattern) 50%,
+    transparent 50%
+  );
+  background-size: 100px 100px;
+}
+
+.text-pattern {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pattern-wavy {
+  background-color: var(--color-background);
+  background-image: repeating-radial-gradient(
+    circle at 0 0,
+    var(--color-pattern) 0,
+    var(--color-background) 40px
+  );
+}
+
+.pattern-isometric {
+  background-color: var(--color-background);
+  background-image:
+    linear-gradient(
+      30deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      150deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      30deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      150deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      60deg,
+      var(--color-pattern) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      60deg,
+      var(--color-pattern) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-size: 42px 74px;
+  background-position:
+    0 0,
+    0 0,
+    21px 37px,
+    21px 37px,
+    0 0,
+    21px 37px;
+}
+
+.pattern-isometric-lg {
+  background-color: var(--color-background);
+  background-image:
+    linear-gradient(
+      30deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      150deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      30deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      150deg,
+      var(--color-pattern) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      var(--color-pattern) 87.5%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      60deg,
+      var(--color-pattern) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    ),
+    linear-gradient(
+      60deg,
+      var(--color-pattern) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      var(--color-pattern) 75%,
+      var(--color-pattern)
+    );
+  background-size: 76px 133px;
+  background-position:
+    0 0,
+    0 0,
+    38px 67px,
+    38px 67px,
+    0 0,
+    38px 67px;
+}
+
+.pattern-cross {
+  background-color: var(--color-background);
+  background:
+    radial-gradient(
+      circle,
+      transparent 20%,
+      var(--color-background) 20%,
+      var(--color-background) 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        var(--color-background) 20%,
+        var(--color-background) 80%,
+        transparent 80%,
+        transparent
+      )
+      52.5px 52.5px,
+    linear-gradient(var(--color-pattern) 4.2px, transparent 4.2px) 0 -2.1px,
+    linear-gradient(
+        90deg,
+        var(--color-pattern) 4.2px,
+        var(--color-background) 4.2px
+      ) -2.1px
+      0;
+  background-size:
+    105px 105px,
+    105px 105px,
+    52.5px 52.5px,
+    52.5px 52.5px;
+}
+
+.pattern-cross-lg {
+  background-color: var(--color-background);
+  background:
+    radial-gradient(
+      circle,
+      transparent 20%,
+      var(--color-background) 20%,
+      var(--color-background) 80%,
+      transparent 80%,
+      transparent
+    ),
+    radial-gradient(
+        circle,
+        transparent 20%,
+        var(--color-background) 20%,
+        var(--color-background) 80%,
+        transparent 80%,
+        transparent
+      )
+      95px 95px,
+    linear-gradient(var(--color-pattern) 7.6px, transparent 7.6px) 0 -3.8px,
+    linear-gradient(
+        90deg,
+        var(--color-pattern) 7.6px,
+        var(--color-background) 7.6px
+      ) -3.8px
+      0;
+  background-size:
+    190px 190px,
+    190px 190px,
+    95px 95px,
+    95px 95px;
+}
+
+.pattern-gottagetthatpaper {
+  background-color: var(--color-background);
+  background-image:
+    linear-gradient(var(--color-pattern) 4.2px, transparent 4.2px),
+    linear-gradient(90deg, var(--color-pattern) 4.2px, transparent 4.2px),
+    linear-gradient(var(--color-pattern) 2.1px, transparent 2.1px),
+    linear-gradient(
+      90deg,
+      var(--color-pattern) 2.1px,
+      var(--color-background) 2.1px
+    );
+  background-size:
+    105px 105px,
+    105px 105px,
+    21px 21px,
+    21px 21px;
+  background-position:
+    -4.2px -4.2px,
+    -4.2px -4.2px,
+    -2.1px -2.1px,
+    -2.1px -2.1px;
+}
+
+.pattern-zigzag-3d {
+  background-color: var(--color-background);
+  background:
+    linear-gradient(135deg, var(--color-pattern) 25%, transparent 25%) -21px 0/
+      42px 42px,
+    linear-gradient(225deg, var(--color-pattern) 25%, transparent 25%) -21px 0/
+      42px 42px,
+    linear-gradient(315deg, var(--color-pattern) 25%, transparent 25%) 0px 0/
+      42px 42px,
+    linear-gradient(
+        45deg,
+        var(--color-pattern) 25%,
+        var(--color-background) 25%
+      )
+      0px 0/ 42px 42px;
+}
+
+.pattern-triangle {
+  background-color: var(--color-background);
+  background-image: linear-gradient(
+    45deg,
+    var(--color-pattern) 50%,
+    var(--color-background) 50%
+  );
+  background-size: 38px 38px;
+}
+
+.pattern-moon {
+  background-color: var(--color-background);
+  background-image: radial-gradient(
+    ellipse farthest-corner at 38px 38px,
+    var(--color-pattern),
+    var(--color-pattern) 50%,
+    var(--color-background) 50%
+  );
+  background-size: 38px 38px;
+}
+
+.marker-pulse {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  animation: marker-pulse 2s infinite;
+}
+
+@keyframes marker-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 /* Google places autocomplete overrides */
@@ -78,7 +844,7 @@
 }
 
 .pac-item {
-  @apply text-white cursor-pointer block text-sm font-normal leading-4 py-3 px-4 border-gray-600;
+  @apply text-white cursor-pointer block text-sm font-normal leading-4 py-3 px-4 border-gray-300;
 }
 
 .pac-item span.pac-icon.pac-icon-marker {
@@ -86,11 +852,11 @@
 }
 
 .pac-item span {
-  @apply text-white text-sm font-normal leading-4;
+  @apply text-white text-sm font-mono leading-4;
 }
 
 .pac-container {
-  @apply bg-black rounded-xl !shadow-none mt-1 !border-none;
+  @apply bg-black rounded-none !shadow-none mt-1 !border-none;
 }
 
 .pac-container .pac-item:hover {
@@ -99,7 +865,7 @@
 
 .pac-container .pac-item:hover > span,
 .pac-container .pac-item:hover .pac-matched {
-  @apply cursor-pointer !text-violet-700;
+  @apply cursor-pointer !text-primary;
 }
 
 .pac-icon.pac-icon-marker {
