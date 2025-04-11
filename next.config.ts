@@ -18,10 +18,6 @@ const nextConfig: NextConfig = {
     buildActivity: false,
     appIsrStatus: false,
   },
-  experimental: {
-    dynamicIO: true,
-    serverComponentsHmrCache: false,
-  },
 }
 
 export default withPWA(nextConfig)
